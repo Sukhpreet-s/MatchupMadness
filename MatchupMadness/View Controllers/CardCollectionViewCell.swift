@@ -10,4 +10,9 @@ import UIKit
 
 class CardCollectionViewCell: UICollectionViewCell {
     
+    // Value of the card
+    // Should be same for 1 more card to match
+    @IBOutlet weak var cardValueLabel: UILabel!
+    
+    
 }
