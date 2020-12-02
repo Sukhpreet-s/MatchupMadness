@@ -1,20 +1,21 @@
 //
-//  GameViewController.swift
+//  StatsViewController.swift
 //  MatchupMadness
 //
-//  Created by Sukhpreet Singh on 2020-11-28.
+//  Created by Sukhpreet Singh on 2020-12-01.
 //  Copyright © 2020 Swift Project. All rights reserved.
 //
 
 import UIKit
 
-class GameViewController: UIViewController {
+class StatsViewController: UIViewController {
     
     // MARK: Properties
-    @IBOutlet weak var GameCollectionView: UICollectionView!
-    
     @IBOutlet weak var movesLabel: UILabel!
+    @IBOutlet weak var previousMovesLabel: UILabel!
     
+    // Hide it if user is logged in
+    @IBOutlet weak var loginMessageLabel: UILabel!
     
 
     override func viewDidLoad() {
