@@ -9,6 +9,13 @@
 import UIKit
 
 class GameViewController: UIViewController {
+    
+    // MARK: Properties
+    @IBOutlet weak var GameCollectionView: UICollectionView!
+    
+    @IBOutlet weak var movesLabel: UILabel!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
