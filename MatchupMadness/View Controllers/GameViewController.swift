@@ -10,6 +10,13 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    let cards: [Card] = [
+        Card("1"),
+        Card("2"),
+        Card("3"),
+        Card("4")
+    ]
+    
     // MARK: Properties
     @IBOutlet weak var GameCollectionView: UICollectionView!
     
@@ -19,19 +26,36 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        GameCollectionView.isHidden = false
 
         // Do any additional setup after loading the view.
     }
     
+    
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.cards.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cardCell: CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath)
+            as! CardCollectionViewCell
+        
+        cardCell.cardValueLabel.text = self.cards[indexPath.row].cardImage
+        
+        //cardCell.setCardValue(self.cards[indexPath.row].cardImage)
+        //cardCell.displayCard()
+        
+        return cardCell
+    }
+    
+    
 }

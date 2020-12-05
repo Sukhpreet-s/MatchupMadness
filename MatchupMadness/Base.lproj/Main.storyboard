@@ -86,6 +86,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="cardValueLabel" destination="C9H-Yf-w7f" id="hgt-5l-9Tz"/>
+                                            <outlet property="contentViewBackground" destination="OE0-cI-cCI" id="NiE-BJ-tQz"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
