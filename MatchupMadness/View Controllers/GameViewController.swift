@@ -8,13 +8,17 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     let cards: [Card] = [
         Card("1"),
         Card("2"),
         Card("3"),
-        Card("4")
+        Card("4"),
+        Card("5"),
+        Card("6"),
+        Card("7"),
+        Card("8")
     ]
     
     // MARK: Properties
@@ -26,20 +30,10 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        GameCollectionView.isHidden = false
 
         // Do any additional setup after loading the view.
     }
     
-    
-
-}
-
-extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.cards.count
@@ -49,13 +43,10 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cardCell: CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath)
             as! CardCollectionViewCell
         
-        cardCell.cardValueLabel.text = self.cards[indexPath.row].cardImage
-        
-        //cardCell.setCardValue(self.cards[indexPath.row].cardImage)
-        //cardCell.displayCard()
+        cardCell.setCardValue(self.cards[indexPath.row].cardImage)
+        cardCell.backgroundColor = UIColor.cyan
         
         return cardCell
     }
-    
-    
+
 }
