@@ -15,9 +15,9 @@ class Card {
     var cardImage: String
     
     // MARK: Initializers
-    init(_ cardId: String, _ hidden: Bool, _ cardImage: String) {
-        self.cardId = cardId
-        self.hidden = hidden
+    init(_ cardImage: String) {
+        self.cardId = UUID().uuidString
+        self.hidden = true
         self.cardImage = cardImage
     }
     
