@@ -12,6 +12,7 @@ class GameViewController: UIViewController {
     
     // MARK: Properties
     
+    var prevFlippedCardIndex: IndexPath?
     var cards: [Card] = []
     
     @IBOutlet weak var GameCollectionView: UICollectionView!
@@ -69,8 +70,38 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cardCell: CardCollectionViewCell = collectionView.cellForItem(at: indexPath) as! CardCollectionViewCell
              
+        // If tapped card is already shown, no need to any further.
         if cardCell.shown { return }
+        
+        // Show the card
         cardCell.show(true)
+        
+        
+        
+        // If no other card is flipped, store current card's indexPath and no need to go further.
+        guard let prevFlippedCardIndex = self.prevFlippedCardIndex else {
+            self.prevFlippedCardIndex = indexPath
+            return
+        }
+        
+        
+        
+        // If one more card is already flipped
+        // TODO: Match prev card with current card
+        let prevCardCell: CardCollectionViewCell = collectionView.cellForItem(at: prevFlippedCardIndex) as! CardCollectionViewCell
+        
+        // Reset the previous flipped card indexPath value
+        self.prevFlippedCardIndex = nil
+        
+        
+        // Run the following if both cards does NOT match.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                       
+            cardCell.show(false)
+            prevCardCell.show(false)
+        }
+        
+        
         
     }
     
