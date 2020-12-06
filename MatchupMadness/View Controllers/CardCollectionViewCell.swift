@@ -10,9 +10,34 @@ import UIKit
 
 class CardCollectionViewCell: UICollectionViewCell {
     
-    // Value of the card
-    // Should be same for 1 more card to match
+    // MARK: Properties
+    
     @IBOutlet weak var cardValueLabel: UILabel!
     
+    var frontColor: UIColor = UIColor.cyan
+    var backColor: UIColor = UIColor.gray
+    
+    var shown: Bool = false
+    
+    
+    // MARK: Functions
+
+    func setCardValue(_ value: String) {
+        cardValueLabel.text = value
+    }
+    
+    func show(_ show: Bool) {
+        if show {
+            self.backgroundColor = self.frontColor
+            self.cardValueLabel.isHidden = false
+            self.shown = true
+            
+        } else {
+            self.backgroundColor = self.backColor
+            self.cardValueLabel.isHidden = true
+            self.shown = false
+        }
+        
+    }
     
 }
