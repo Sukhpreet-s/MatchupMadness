@@ -8,45 +8,70 @@
 
 import UIKit
 
-class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    let cards: [Card] = [
-        Card("1"),
-        Card("2"),
-        Card("3"),
-        Card("4"),
-        Card("5"),
-        Card("6"),
-        Card("7"),
-        Card("8")
-    ]
+class GameViewController: UIViewController {
     
     // MARK: Properties
-    @IBOutlet weak var GameCollectionView: UICollectionView!
     
+    var cards: [Card] = []
+    
+    @IBOutlet weak var GameCollectionView: UICollectionView!
     @IBOutlet weak var movesLabel: UILabel!
     
     
-
+    // MARK: Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Init Game and Cards here.
+        loadCards()
+        
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.cards.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cardCell: CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath)
-            as! CardCollectionViewCell
+    func loadCards() {
+        var cards: [Card] = [Card]()
         
-        cardCell.setCardValue(self.cards[indexPath.row].cardImage)
-        cardCell.backgroundColor = UIColor.cyan
+        let values: [String] = ["1", "2", "3", "4"]
         
-        return cardCell
+        // Add cards
+        
+        for value in values {
+            let card: Card = Card(value)
+            let copy: Card = card.copyCard()
+            
+            cards.append(card)
+            cards.append(copy)
+        }
+        
+        cards.shuffle()
+        self.cards = cards
     }
 
+}
+
+// MARK: DataSource, Delegate
+extension GameViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       self.cards.count
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       let cardCell: CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath)
+           as! CardCollectionViewCell
+       
+        cardCell.setCardValue(self.cards[indexPath.row].cardImage)
+        cardCell.show(false)
+       
+       return cardCell
+   }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cardCell: CardCollectionViewCell = collectionView.cellForItem(at: indexPath) as! CardCollectionViewCell
+             
+        if cardCell.shown { return }
+        cardCell.show(true)
+        
+    }
+    
 }
