@@ -17,6 +17,11 @@
 		A3AFAED9256DE59C005BCD09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3AFAED8256DE59C005BCD09 /* Assets.xcassets */; };
 		A3AFAEDC256DE59C005BCD09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3AFAEDA256DE59C005BCD09 /* LaunchScreen.storyboard */; };
 		A3EBC72F2572D97300B7ED17 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EBC72E2572D97300B7ED17 /* GameViewController.swift */; };
+		E7D087C52585735E00E82A06 /* MatchupMadness.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7D087C32585735E00E82A06 /* MatchupMadness.xcdatamodeld */; };
+		E7D087CA258575E700E82A06 /* Security+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D087C6258575E700E82A06 /* Security+CoreDataClass.swift */; };
+		E7D087CB258575E700E82A06 /* Security+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D087C7258575E700E82A06 /* Security+CoreDataProperties.swift */; };
+		E7D087CC258575E700E82A06 /* Scoreboard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D087C8258575E700E82A06 /* Scoreboard+CoreDataClass.swift */; };
+		E7D087CD258575E700E82A06 /* Scoreboard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D087C9258575E700E82A06 /* Scoreboard+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		A3AFAEDB256DE59C005BCD09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3AFAEDD256DE59C005BCD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3EBC72E2572D97300B7ED17 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		E7D087C42585735E00E82A06 /* MatchupMadness.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatchupMadness.xcdatamodel; sourceTree = "<group>"; };
+		E7D087C6258575E700E82A06 /* Security+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Security+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E7D087C7258575E700E82A06 /* Security+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Security+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E7D087C8258575E700E82A06 /* Scoreboard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scoreboard+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E7D087C9258575E700E82A06 /* Scoreboard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scoreboard+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				A38EE2EF257BEA8B000B5C2B /* Card.swift */,
+				E7D087C32585735E00E82A06 /* MatchupMadness.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -72,6 +83,7 @@
 		A3AFAECE256DE59C005BCD09 /* MatchupMadness */ = {
 			isa = PBXGroup;
 			children = (
+				E7D087CE2585761D00E82A06 /* Data */,
 				A38EE2EE257BEA4D000B5C2B /* Models */,
 				A3EBC72D2572D94500B7ED17 /* View Controllers */,
 				A3AFAECF256DE59C005BCD09 /* AppDelegate.swift */,
@@ -93,6 +105,17 @@
 				A32FE01725772D4B00BA4D27 /* StatsViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		E7D087CE2585761D00E82A06 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E7D087C6258575E700E82A06 /* Security+CoreDataClass.swift */,
+				E7D087C7258575E700E82A06 /* Security+CoreDataProperties.swift */,
+				E7D087C8258575E700E82A06 /* Scoreboard+CoreDataClass.swift */,
+				E7D087C9258575E700E82A06 /* Scoreboard+CoreDataProperties.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,10 +189,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7D087C52585735E00E82A06 /* MatchupMadness.xcdatamodeld in Sources */,
 				A3EBC72F2572D97300B7ED17 /* GameViewController.swift in Sources */,
 				A3AFAED4256DE59C005BCD09 /* ViewController.swift in Sources */,
 				A38EE2F0257BEA8B000B5C2B /* Card.swift in Sources */,
+				E7D087CC258575E700E82A06 /* Scoreboard+CoreDataClass.swift in Sources */,
+				E7D087CD258575E700E82A06 /* Scoreboard+CoreDataProperties.swift in Sources */,
 				A3AFAED0256DE59C005BCD09 /* AppDelegate.swift in Sources */,
+				E7D087CB258575E700E82A06 /* Security+CoreDataProperties.swift in Sources */,
+				E7D087CA258575E700E82A06 /* Security+CoreDataClass.swift in Sources */,
 				A32FE01625771F7900BA4D27 /* CardCollectionViewCell.swift in Sources */,
 				A32FE01825772D4B00BA4D27 /* StatsViewController.swift in Sources */,
 				A3AFAED2256DE59C005BCD09 /* SceneDelegate.swift in Sources */,
@@ -368,6 +396,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E7D087C32585735E00E82A06 /* MatchupMadness.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E7D087C42585735E00E82A06 /* MatchupMadness.xcdatamodel */,
+			);
+			currentVersion = E7D087C42585735E00E82A06 /* MatchupMadness.xcdatamodel */;
+			path = MatchupMadness.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A3AFAEC4256DE59C005BCD09 /* Project object */;
 }
