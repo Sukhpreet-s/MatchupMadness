@@ -16,6 +16,7 @@
 		A3AFAED7256DE59C005BCD09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3AFAED5256DE59C005BCD09 /* Main.storyboard */; };
 		A3AFAED9256DE59C005BCD09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3AFAED8256DE59C005BCD09 /* Assets.xcassets */; };
 		A3AFAEDC256DE59C005BCD09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3AFAEDA256DE59C005BCD09 /* LaunchScreen.storyboard */; };
+		A3C6D123258672E100355DDD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C6D122258672E100355DDD /* Game.swift */; };
 		A3EBC72F2572D97300B7ED17 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EBC72E2572D97300B7ED17 /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		A3AFAED8256DE59C005BCD09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3AFAEDB256DE59C005BCD09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3AFAEDD256DE59C005BCD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3C6D122258672E100355DDD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		A3EBC72E2572D97300B7ED17 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				A38EE2EF257BEA8B000B5C2B /* Card.swift */,
+				A3C6D122258672E100355DDD /* Game.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				A32FE01625771F7900BA4D27 /* CardCollectionViewCell.swift in Sources */,
 				A32FE01825772D4B00BA4D27 /* StatsViewController.swift in Sources */,
 				A3AFAED2256DE59C005BCD09 /* SceneDelegate.swift in Sources */,
+				A3C6D123258672E100355DDD /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
