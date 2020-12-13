@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
     // MARK: Properties
     
     var prevFlippedCardIndex: IndexPath?
-    var cards: [Card] = []
+    var game: Game = Game()
     
     @IBOutlet weak var GameCollectionView: UICollectionView!
     @IBOutlet weak var movesLabel: UILabel!
@@ -25,27 +25,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
 
         // Init Game and Cards here.
-        loadCards()
+        self.game.initGame()
         
-    }
-    
-    func loadCards() {
-        var cards: [Card] = [Card]()
-        
-        let values: [String] = ["1", "2", "3", "4"]
-        
-        // Add cards
-        
-        for value in values {
-            let card: Card = Card(value)
-            let copy: Card = card.copyCard()
-            
-            cards.append(card)
-            cards.append(copy)
-        }
-        
-        cards.shuffle()
-        self.cards = cards
     }
 
 }
@@ -54,14 +35,14 @@ class GameViewController: UIViewController {
 extension GameViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       self.cards.count
+        self.game.cards.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        let cardCell: CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath)
            as! CardCollectionViewCell
        
-        cardCell.setCardValue(self.cards[indexPath.row].cardImage)
+        cardCell.card = self.game.cards[indexPath.row]
         cardCell.show(false)
        
        return cardCell
@@ -69,6 +50,8 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cardCell: CardCollectionViewCell = collectionView.cellForItem(at: indexPath) as! CardCollectionViewCell
+        
+        guard let card = cardCell.card else {return}
              
         // If tapped card is already shown, no need to any further.
         if cardCell.shown { return }
@@ -76,30 +59,35 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
         // Show the card
         cardCell.show(true)
         
-        
-        
         // If no other card is flipped, store current card's indexPath and no need to go further.
         guard let prevFlippedCardIndex = self.prevFlippedCardIndex else {
             self.prevFlippedCardIndex = indexPath
+            self.game.addCardShown(card: card)
             return
         }
         
         
-        
         // If one more card is already flipped
-        // TODO: Match prev card with current card
-        let prevCardCell: CardCollectionViewCell = collectionView.cellForItem(at: prevFlippedCardIndex) as! CardCollectionViewCell
-        
-        // Reset the previous flipped card indexPath value
-        self.prevFlippedCardIndex = nil
-        
-        
-        // Run the following if both cards does NOT match.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                       
-            cardCell.show(false)
-            prevCardCell.show(false)
+        if self.game.matchCards(card: card) {
+            self.prevFlippedCardIndex = nil
+            return
+        } else {
+            
+            let prevCardCell: CardCollectionViewCell = collectionView.cellForItem(at: prevFlippedCardIndex) as! CardCollectionViewCell
+            
+            // Reset the previous flipped card indexPath value
+            self.prevFlippedCardIndex = nil
+            
+            // Hide the card after 0.5 seconds.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                           
+                cardCell.show(false)
+                prevCardCell.show(false)
+            }
         }
+        
+        
+        
         
         
         
