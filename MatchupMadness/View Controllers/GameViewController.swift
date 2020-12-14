@@ -12,6 +12,9 @@ class GameViewController: UIViewController {
     
     // MARK: Properties
     
+    var seconds: Int = 0
+    var timer = Timer()
+    
     var prevFlippedCardIndex: IndexPath?
     var game: Game = Game()
     
@@ -25,8 +28,55 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
 
         // Init Game and Cards here.
+              
         self.game.initGame()
         
+        self.GameCollectionView.isUserInteractionEnabled = false
+        
+    }
+    
+    @IBAction func startGame(_ sender: UIButton) {
+        
+        // Game start functionality
+        self.GameCollectionView.isUserInteractionEnabled = true
+        runTimer()
+        
+    }
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTime() {
+        self.seconds += 1
+        self.movesLabel.text = getTimeLabelValue(self.seconds)
+    }
+    
+    func getTimeLabelValue(_ seconds: Int) -> String {
+        if seconds >= 0 && seconds < 10 {
+            return "00:0\(seconds)"
+        }
+        else if seconds <= 60 && seconds >= 10 {
+            return "00:\(seconds)"
+        }
+        else if seconds > 60 {
+            let minutes = seconds / 60
+            let sec = seconds % 60
+            
+            if minutes > 0 && minutes < 10 && sec < 10 {
+                return "0\(minutes):0\(sec)"
+            }
+            else if minutes > 0 && minutes < 10 && sec >= 10 {
+                return "0\(minutes):\(sec)"
+            }
+            else if minutes >= 10 && sec < 10 {
+                return "\(minutes):0\(sec)"
+            }
+            else if minutes >= 10 && sec >= 10 {
+                return "\(minutes):\(sec)"
+            }
+        }
+        return "Oops"
     }
 
 }
