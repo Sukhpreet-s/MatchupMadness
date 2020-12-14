@@ -12,11 +12,17 @@ class GameViewController: UIViewController {
     
     // MARK: Properties
     
+    var seconds: Int = 0
+    var timer = Timer()
+    
     var prevFlippedCardIndex: IndexPath?
-    var cards: [Card] = []
+    var game: Game = Game()
     
     @IBOutlet weak var GameCollectionView: UICollectionView!
     @IBOutlet weak var movesLabel: UILabel!
+    
+    @IBOutlet weak var gameEndLabel: UILabel!
+    @IBOutlet weak var statsButton: UIButton!
     
     
     // MARK: Functions
@@ -25,27 +31,67 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
 
         // Init Game and Cards here.
-        loadCards()
+              
+        self.game.initGame()
+        
+        self.GameCollectionView.isUserInteractionEnabled = false
+        self.gameEndLabel.isHidden = true
+        self.statsButton.isHidden = true
         
     }
     
-    func loadCards() {
-        var cards: [Card] = [Card]()
+    @IBAction func startGame(_ sender: UIButton) {
         
-        let values: [String] = ["1", "2", "3", "4"]
+        // Game start functionality
+        self.GameCollectionView.isUserInteractionEnabled = true
+        runTimer()
         
-        // Add cards
-        
-        for value in values {
-            let card: Card = Card(value)
-            let copy: Card = card.copyCard()
-            
-            cards.append(card)
-            cards.append(copy)
+    }
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTime() {
+        self.seconds += 1
+        self.movesLabel.text = getTimeLabelValue(self.seconds)
+    }
+    
+    func getTimeLabelValue(_ seconds: Int) -> String {
+        if seconds >= 0 && seconds < 10 {
+            return "00:0\(seconds)"
         }
+        else if seconds <= 60 && seconds >= 10 {
+            return "00:\(seconds)"
+        }
+        else if seconds > 60 {
+            let minutes = seconds / 60
+            let sec = seconds % 60
+            
+            if minutes > 0 && minutes < 10 && sec < 10 {
+                return "0\(minutes):0\(sec)"
+            }
+            else if minutes > 0 && minutes < 10 && sec >= 10 {
+                return "0\(minutes):\(sec)"
+            }
+            else if minutes >= 10 && sec < 10 {
+                return "\(minutes):0\(sec)"
+            }
+            else if minutes >= 10 && sec >= 10 {
+                return "\(minutes):\(sec)"
+            }
+        }
+        return "Oops"
+    }
+    
+    func stopGame() {
         
-        cards.shuffle()
-        self.cards = cards
+        // Stop the timer
+        self.timer.invalidate()
+        // display a message for game finished.
+        self.gameEndLabel.isHidden = false
+        // Display the button to go to Stats page.
+        self.statsButton.isHidden = false
     }
 
 }
@@ -54,14 +100,14 @@ class GameViewController: UIViewController {
 extension GameViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       self.cards.count
+        self.game.cards.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        let cardCell: CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath)
            as! CardCollectionViewCell
        
-        cardCell.setCardValue(self.cards[indexPath.row].cardImage)
+        cardCell.card = self.game.cards[indexPath.row]
         cardCell.show(false)
        
        return cardCell
@@ -69,6 +115,8 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cardCell: CardCollectionViewCell = collectionView.cellForItem(at: indexPath) as! CardCollectionViewCell
+        
+        guard let card = cardCell.card else {return}
              
         // If tapped card is already shown, no need to any further.
         if cardCell.shown { return }
@@ -76,30 +124,41 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
         // Show the card
         cardCell.show(true)
         
-        
-        
         // If no other card is flipped, store current card's indexPath and no need to go further.
         guard let prevFlippedCardIndex = self.prevFlippedCardIndex else {
             self.prevFlippedCardIndex = indexPath
+            self.game.addCardShown(card: card)
             return
         }
         
         
-        
         // If one more card is already flipped
-        // TODO: Match prev card with current card
-        let prevCardCell: CardCollectionViewCell = collectionView.cellForItem(at: prevFlippedCardIndex) as! CardCollectionViewCell
-        
-        // Reset the previous flipped card indexPath value
-        self.prevFlippedCardIndex = nil
-        
-        
-        // Run the following if both cards does NOT match.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                       
-            cardCell.show(false)
-            prevCardCell.show(false)
+        if self.game.matchCards(card: card) {
+            self.prevFlippedCardIndex = nil
+            
+            // Game end logic
+            if self.game.hasEnded() {
+                stopGame()
+            }
+            
+            return
+        } else {
+            
+            let prevCardCell: CardCollectionViewCell = collectionView.cellForItem(at: prevFlippedCardIndex) as! CardCollectionViewCell
+            
+            // Reset the previous flipped card indexPath value
+            self.prevFlippedCardIndex = nil
+            
+            // Hide the card after 0.5 seconds.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                           
+                cardCell.show(false)
+                prevCardCell.show(false)
+            }
         }
+        
+        
+        
         
         
         

@@ -18,13 +18,17 @@ class CardCollectionViewCell: UICollectionViewCell {
     var backColor: UIColor = UIColor.gray
     
     var shown: Bool = false
+    var card: Card? {
+        didSet {
+            guard let card = card else {return}
+            
+            self.cardValueLabel.text = card.cardImage
+        }
+    }
     
     
     // MARK: Functions
 
-    func setCardValue(_ value: String) {
-        cardValueLabel.text = value
-    }
     
     func show(_ show: Bool) {
         if show {
