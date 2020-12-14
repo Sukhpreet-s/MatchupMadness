@@ -57,4 +57,8 @@ class Game {
         self.visibleCards.append(card)
     }
     
+    func hasEnded() -> Bool {
+        return self.cards.count == self.visibleCards.count
+    }
+    
 }

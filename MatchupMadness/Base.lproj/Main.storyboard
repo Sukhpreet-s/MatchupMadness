@@ -71,10 +71,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqK-UH-DCj">
-                                <rect key="frame" x="183" y="699" width="48" height="30"/>
+                                <rect key="frame" x="147" y="699" width="122" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Stats"/>
+                                <state key="normal" title="Go to Stats"/>
                                 <connections>
                                     <segue destination="haZ-Nb-s7P" kind="show" id="JZN-Ay-oVx"/>
                                 </connections>
@@ -134,6 +134,13 @@
                                     <action selector="startGame:" destination="Guf-ly-D9o" eventType="touchUpInside" id="omk-vL-R76"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The game has finished!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4e5-Ag-ovh">
+                                <rect key="frame" x="107" y="660" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="I2F-2v-Xmq"/>
@@ -141,7 +148,9 @@
                     <navigationItem key="navigationItem" id="A52-8b-4Dw"/>
                     <connections>
                         <outlet property="GameCollectionView" destination="LnJ-3P-BV0" id="xhT-O0-Hxv"/>
+                        <outlet property="gameEndLabel" destination="4e5-Ag-ovh" id="d85-eU-74n"/>
                         <outlet property="movesLabel" destination="a5f-DR-tro" id="nsq-lg-Iul"/>
+                        <outlet property="statsButton" destination="EqK-UH-DCj" id="QRE-ax-ZiU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmn-mK-cqX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

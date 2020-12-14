@@ -21,6 +21,9 @@ class GameViewController: UIViewController {
     @IBOutlet weak var GameCollectionView: UICollectionView!
     @IBOutlet weak var movesLabel: UILabel!
     
+    @IBOutlet weak var gameEndLabel: UILabel!
+    @IBOutlet weak var statsButton: UIButton!
+    
     
     // MARK: Functions
     
@@ -32,6 +35,8 @@ class GameViewController: UIViewController {
         self.game.initGame()
         
         self.GameCollectionView.isUserInteractionEnabled = false
+        self.gameEndLabel.isHidden = true
+        self.statsButton.isHidden = true
         
     }
     
@@ -78,6 +83,16 @@ class GameViewController: UIViewController {
         }
         return "Oops"
     }
+    
+    func stopGame() {
+        
+        // Stop the timer
+        self.timer.invalidate()
+        // display a message for game finished.
+        self.gameEndLabel.isHidden = false
+        // Display the button to go to Stats page.
+        self.statsButton.isHidden = false
+    }
 
 }
 
@@ -120,6 +135,12 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
         // If one more card is already flipped
         if self.game.matchCards(card: card) {
             self.prevFlippedCardIndex = nil
+            
+            // Game end logic
+            if self.game.hasEnded() {
+                stopGame()
+            }
+            
             return
         } else {
             
