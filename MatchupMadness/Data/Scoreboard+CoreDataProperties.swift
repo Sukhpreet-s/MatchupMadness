@@ -17,8 +17,7 @@ extension Scoreboard {
         return NSFetchRequest<Scoreboard>(entityName: "Scoreboard")
     }
 
-    @NSManaged public var username: String?
+
     @NSManaged public var time: Int32
-    @NSManaged public var moves: Int32
 
 }

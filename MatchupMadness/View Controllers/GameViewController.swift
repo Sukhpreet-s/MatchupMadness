@@ -6,6 +6,7 @@
 //  Copyright © 2020 Swift Project. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class GameViewController: UIViewController {
@@ -26,6 +27,7 @@ class GameViewController: UIViewController {
 
         // Init Game and Cards here.
         loadCards()
+        createData()
         
     }
     
@@ -47,7 +49,25 @@ class GameViewController: UIViewController {
         cards.shuffle()
         self.cards = cards
     }
-
+    func createData(){
+    
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let scoreboardEntity = NSEntityDescription.entity(forEntityName: "Scoreboard", in: managedContext);
+        
+        for i in 1...5{
+            var random = Int.random(in:50...150)
+            let score = NSManagedObject(entity: scoreboardEntity!, insertInto: managedContext)
+            score.setValue(random, forKey: "time");
+        }
+        do{
+            try managedContext.save()
+        }
+        catch let error as NSError {
+            print("Something went wrong. \(error), \(error.userInfo)")
+        }
+        
+    }
 }
 
 // MARK: DataSource, Delegate
