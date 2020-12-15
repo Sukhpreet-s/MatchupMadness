@@ -67,6 +67,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         highscoreTableView.reloadData()
         
         movesLabel.text = Game.getTimeLabelValue(currentScore) + " minutes"
+        
+        self.navigationItem.hidesBackButton = true
     }
     
     // MARK: - Table Data Source
