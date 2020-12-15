@@ -13,12 +13,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //set up number of rows and cell content for table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchScores().count;
+        return times.count;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tempCell = tableView.dequeueReusableCell(withIdentifier: "row")
-        tempCell?.textLabel?.text = fetchScores()[indexPath.row]
+        tempCell?.textLabel?.text = times[indexPath.row]
         return tempCell!
     }
     
@@ -30,14 +30,20 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func fetchScores()->[String] {
-       // let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Scoreboard")
-        scores = try! context.fetch(Scoreboard.fetchRequest());
+       // let  = NSFetchRequest<NSFetchRequestResult>(entityName: "Scoreboard")
+        let scoresFetch:NSFetchRequest<Scoreboard> = Scoreboard.fetchRequest()
+        var timeSort = NSSortDescriptor(key:"time", ascending:true)
+        scoresFetch.sortDescriptors = [timeSort]
+
+        scores = try! context.fetch(scoresFetch);
         for score in scores
         {
-            times.append(String(score.time))
+            var formatted = Game.getTimeLabelValue(Int(score.time))
+            times.append(formatted)
            
         }
-         return times;
+        
+        return times;
     }
     
    
@@ -51,6 +57,17 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        times = fetchScores();
+        highscoreTableView.register(UITableViewCell.self,
+                                    forCellReuseIdentifier: "row")
+        highscoreTableView.delegate = self
+        highscoreTableView.dataSource = self
+        highscoreTableView.reloadData()
+        
+        
+        
+        
      
         // Do any additional setup after loading the view.
     }

@@ -60,5 +60,32 @@ class Game {
     func hasEnded() -> Bool {
         return self.cards.count == self.visibleCards.count
     }
+    static func getTimeLabelValue(_ seconds: Int) -> String {
+        if seconds >= 0 && seconds < 10 {
+            return "00:0\(seconds)"
+        }
+        else if seconds <= 60 && seconds >= 10 {
+            return "00:\(seconds)"
+        }
+        else if seconds > 60 {
+            let minutes = seconds / 60
+            let sec = seconds % 60
+            
+            if minutes > 0 && minutes < 10 && sec < 10 {
+                return "0\(minutes):0\(sec)"
+            }
+            else if minutes > 0 && minutes < 10 && sec >= 10 {
+                return "0\(minutes):\(sec)"
+            }
+            else if minutes >= 10 && sec < 10 {
+                return "\(minutes):0\(sec)"
+            }
+            else if minutes >= 10 && sec >= 10 {
+                return "\(minutes):\(sec)"
+            }
+        }
+        return "Oops"
+    }
+    
     
 }

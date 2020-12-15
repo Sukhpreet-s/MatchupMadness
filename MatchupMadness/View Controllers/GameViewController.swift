@@ -42,8 +42,7 @@ class GameViewController: UIViewController {
         self.gameEndLabel.isHidden = true
         self.statsButton.isHidden = true
     
-        createData()
-        
+    
     }
     
     @IBAction func startGame(_ sender: UIButton) {
@@ -60,36 +59,10 @@ class GameViewController: UIViewController {
     
     @objc func updateTime() {
         self.seconds += 1
-        self.movesLabel.text = getTimeLabelValue(self.seconds)
+        self.movesLabel.text = Game.getTimeLabelValue(self.seconds)
     }
     
-    func getTimeLabelValue(_ seconds: Int) -> String {
-        if seconds >= 0 && seconds < 10 {
-            return "00:0\(seconds)"
-        }
-        else if seconds <= 60 && seconds >= 10 {
-            return "00:\(seconds)"
-        }
-        else if seconds > 60 {
-            let minutes = seconds / 60
-            let sec = seconds % 60
-            
-            if minutes > 0 && minutes < 10 && sec < 10 {
-                return "0\(minutes):0\(sec)"
-            }
-            else if minutes > 0 && minutes < 10 && sec >= 10 {
-                return "0\(minutes):\(sec)"
-            }
-            else if minutes >= 10 && sec < 10 {
-                return "\(minutes):0\(sec)"
-            }
-            else if minutes >= 10 && sec >= 10 {
-                return "\(minutes):\(sec)"
-            }
-        }
-        return "Oops"
-    }
-    
+
     func stopGame() {
         
         // Stop the timer
@@ -98,18 +71,19 @@ class GameViewController: UIViewController {
         self.gameEndLabel.isHidden = false
         // Display the button to go to Stats page.
         self.statsButton.isHidden = false
+        //write time to db here
+        createData()
     }
     func createData(){
     
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let scoreboardEntity = NSEntityDescription.entity(forEntityName: "Scoreboard", in: managedContext);
-        
-        for i in 1...5{
-            var random = Int.random(in:50...150)
+
+           
             let score = NSManagedObject(entity: scoreboardEntity!, insertInto: managedContext)
-            score.setValue(random, forKey: "time");
-        }
+            score.setValue(seconds, forKey: "time");
+        
         do{
             try managedContext.save()
         }
