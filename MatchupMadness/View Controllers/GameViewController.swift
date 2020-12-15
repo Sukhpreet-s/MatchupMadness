@@ -24,6 +24,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var gameEndLabel: UILabel!
     @IBOutlet weak var statsButton: UIButton!
+    @IBOutlet weak var startButton: UIButton!
     
     
     // MARK: Functions
@@ -33,15 +34,12 @@ class GameViewController: UIViewController {
 
         // Init Game and Cards here.
 
-   
-
-              
         self.game.initGame()
         
         self.GameCollectionView.isUserInteractionEnabled = false
         self.gameEndLabel.isHidden = true
         self.statsButton.isHidden = true
-    
+        self.startButton.isHidden = false
     
     }
     
@@ -51,6 +49,14 @@ class GameViewController: UIViewController {
         self.GameCollectionView.isUserInteractionEnabled = true
         runTimer()
         
+    }
+    
+    
+    @IBAction func goToStatsAction(_ sender: UIButton) {
+        let vc: StatsViewController = self.storyboard?.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
+        
+        vc.currentScore = self.seconds
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func runTimer() {
@@ -71,6 +77,8 @@ class GameViewController: UIViewController {
         self.gameEndLabel.isHidden = false
         // Display the button to go to Stats page.
         self.statsButton.isHidden = false
+        // Hide the Start button
+        self.startButton.isHidden = true
         //write time to db here
         createData()
     }
