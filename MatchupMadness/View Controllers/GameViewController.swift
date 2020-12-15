@@ -15,6 +15,7 @@ class GameViewController: UIViewController {
     
     var seconds: Int = 0
     var timer = Timer()
+    var started = false
     
     var prevFlippedCardIndex: IndexPath?
     var game: Game = Game()
@@ -48,8 +49,12 @@ class GameViewController: UIViewController {
     @IBAction func startGame(_ sender: UIButton) {
         
         // Game start functionality
-        self.GameCollectionView.isUserInteractionEnabled = true
-        runTimer()
+        if started == false{
+            self.GameCollectionView.isUserInteractionEnabled = true
+            runTimer()
+            started = true
+        }
+
         
     }
     
