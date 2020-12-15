@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1E75D3258844C800032707 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E75D2258844C800032707 /* RulesViewController.swift */; };
 		A32FE01625771F7900BA4D27 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32FE01525771F7900BA4D27 /* CardCollectionViewCell.swift */; };
 		A32FE01825772D4B00BA4D27 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32FE01725772D4B00BA4D27 /* StatsViewController.swift */; };
 		A38EE2F0257BEA8B000B5C2B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38EE2EF257BEA8B000B5C2B /* Card.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A1E75D2258844C800032707 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		A32FE01525771F7900BA4D27 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		A32FE01725772D4B00BA4D27 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		A38EE2EF257BEA8B000B5C2B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				A3AFAED8256DE59C005BCD09 /* Assets.xcassets */,
 				A3AFAEDA256DE59C005BCD09 /* LaunchScreen.storyboard */,
 				A3AFAEDD256DE59C005BCD09 /* Info.plist */,
+				9A1E75D2258844C800032707 /* RulesViewController.swift */,
 			);
 			path = MatchupMadness;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				A3AFAED4256DE59C005BCD09 /* ViewController.swift in Sources */,
 				A38EE2F0257BEA8B000B5C2B /* Card.swift in Sources */,
 				A3AFAED0256DE59C005BCD09 /* AppDelegate.swift in Sources */,
+				9A1E75D3258844C800032707 /* RulesViewController.swift in Sources */,
 				A32FE01625771F7900BA4D27 /* CardCollectionViewCell.swift in Sources */,
 				A32FE01825772D4B00BA4D27 /* StatsViewController.swift in Sources */,
 				A3AFAED2256DE59C005BCD09 /* SceneDelegate.swift in Sources */,
