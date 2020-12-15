@@ -19,12 +19,13 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tempCell = tableView.dequeueReusableCell(withIdentifier: "row")
         tempCell?.textLabel?.text = times[indexPath.row]
+        tempCell?.textLabel?.textAlignment = .center
         return tempCell!
     }
     
     
-     // MARK: Properties
-     var scores: [Scoreboard] = []
+    // MARK: Properties
+    var scores: [Scoreboard] = []
     var times: [String] = []
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -32,13 +33,13 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func fetchScores()->[String] {
        // let  = NSFetchRequest<NSFetchRequestResult>(entityName: "Scoreboard")
         let scoresFetch:NSFetchRequest<Scoreboard> = Scoreboard.fetchRequest()
-        var timeSort = NSSortDescriptor(key:"time", ascending:true)
+        let timeSort = NSSortDescriptor(key:"time", ascending:true)
         scoresFetch.sortDescriptors = [timeSort]
 
         scores = try! context.fetch(scoresFetch);
         for score in scores
         {
-            var formatted = Game.getTimeLabelValue(Int(score.time))
+            let formatted = Game.getTimeLabelValue(Int(score.time)) + " minutes"
             times.append(formatted)
            
         }
@@ -51,8 +52,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var previousMovesLabel: UILabel!
     
     @IBOutlet weak var highscoreTableView: UITableView!
-    // Hide it if user is logged in
-    @IBOutlet weak var loginMessageLabel: UILabel!
+    
+    var currentScore: Int = 0
     
 
     override func viewDidLoad() {
@@ -65,11 +66,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         highscoreTableView.dataSource = self
         highscoreTableView.reloadData()
         
+        movesLabel.text = Game.getTimeLabelValue(currentScore) + " minutes"
         
-        
-        
-     
-        // Do any additional setup after loading the view.
+        self.navigationItem.hidesBackButton = true
     }
     
     // MARK: - Table Data Source
