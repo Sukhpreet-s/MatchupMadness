@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A612A5A258988520099D9FA /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A612A59258988520099D9FA /* RulesViewController.swift */; };
 		A32FE01625771F7900BA4D27 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32FE01525771F7900BA4D27 /* CardCollectionViewCell.swift */; };
 		A32FE01825772D4B00BA4D27 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32FE01725772D4B00BA4D27 /* StatsViewController.swift */; };
 		A38EE2F0257BEA8B000B5C2B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38EE2EF257BEA8B000B5C2B /* Card.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A612A59258988520099D9FA /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		A32FE01525771F7900BA4D27 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		A32FE01725772D4B00BA4D27 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		A38EE2EF257BEA8B000B5C2B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -63,14 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				A38EE2EF257BEA8B000B5C2B /* Card.swift */,
-
 				E7D087C32585735E00E82A06 /* MatchupMadness.xcdatamodeld */,
 				E791390025880FC200B14C72 /* Score.swift */,
-
-
 				A3C6D122258672E100355DDD /* Game.swift */,
-
-
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -104,6 +101,7 @@
 				A3AFAED8256DE59C005BCD09 /* Assets.xcassets */,
 				A3AFAEDA256DE59C005BCD09 /* LaunchScreen.storyboard */,
 				A3AFAEDD256DE59C005BCD09 /* Info.plist */,
+				9A612A59258988520099D9FA /* RulesViewController.swift */,
 			);
 			path = MatchupMadness;
 			sourceTree = "<group>";
@@ -210,6 +208,7 @@
 				E7D087CB258575E700E82A06 /* Security+CoreDataProperties.swift in Sources */,
 				E791390125880FC200B14C72 /* Score.swift in Sources */,
 				E7D087CA258575E700E82A06 /* Security+CoreDataClass.swift in Sources */,
+				9A612A5A258988520099D9FA /* RulesViewController.swift in Sources */,
 				A32FE01625771F7900BA4D27 /* CardCollectionViewCell.swift in Sources */,
 				A32FE01825772D4B00BA4D27 /* StatsViewController.swift in Sources */,
 				A3AFAED2256DE59C005BCD09 /* SceneDelegate.swift in Sources */,
